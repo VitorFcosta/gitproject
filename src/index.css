@@ -1,32 +1,43 @@
 @import "tailwindcss";
 
 @theme {
-  /* Cores */
-  --color-neo-yellow: #FFF000;
-  --color-neo-pink: #FF90E8;
-  --color-neo-cyan: #00F0FF;
-  --color-neo-black: #000000;
-  --color-neo-white: #FFFFFF;
-  --color-neo-surface: #f6f6f6;
-  --color-neo-error: #f95630;
+  /* PRIMITIVAS */
+  --color-yellow-vivid: #FFF000;
+  --color-pink-vivid: #FF90E8;
+  --color-cyan-vivid: #00F0FF;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-gray-light: #f6f6f6;
+  --color-red-vivid: #f95630;
 
-  /* Fontes */
+  /* SEMÂNTICAS */
+  --color-primary: #FFF000;
+  --color-secondary: #FF90E8;
+  --color-accent: #00F0FF;
+  --color-surface: #f6f6f6;
+  --color-foreground: #000000;
+  --color-error: #f95630;
+  --color-on-primary: #000000;
+  --color-on-surface: #000000;
+
+  /* TIPOGRAFIA */
   --font-heading: "Space Grotesk", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
 
-  /* Sombras */
+  /* BORDAS & SOMBRAS  */
   --shadow-brutal: 8px 8px 0px #000000;
   --shadow-brutal-sm: 4px 4px 0px #000000;
   --shadow-brutal-hover: 12px 12px 0px #000000;
 }
 
+/* ESTILOS GLOBAIS */
 
-/* Estilo base */
-body{
+body {
   font-family: var(--font-mono);
-  background-color: var(--color-neo-surface);
-  color: var(--color-neo-black);
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
 }
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   text-transform: uppercase;
