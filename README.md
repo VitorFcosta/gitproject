@@ -171,7 +171,7 @@ src/
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/gitproject.git
+git clone https://github.com/VitorFcosta/gitproject.git
 cd gitproject
 
 # Instale as dependências
