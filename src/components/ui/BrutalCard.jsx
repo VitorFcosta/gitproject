@@ -31,13 +31,45 @@ const cardVariants = cva(
   }
 )
 
-export default function BrutalCard({ children, variant, padding, hover, className, ...props }) {
+export default function BrutalCard({ 
+  children, 
+  variant, 
+  padding, 
+  hover, 
+  header,
+  headerRight,
+  footerContent,
+  footerTinted,
+  className, 
+  ...props 
+}) {
+  const hasHeader = !!header
+  const hasFooter = !!footerContent
+
   return (
     <div
-      className={cn(cardVariants({ variant, padding, hover }), className)}
+      className={cn(
+        cardVariants({ variant, padding: hasHeader || hasFooter ? 'none' : padding, hover }),
+        className
+      )}
       {...props}
     >
-      {children}
+      {hasHeader && (
+        <div className="card-header">
+          <span>{header}</span>
+          {headerRight && (
+            <span className="card-header-right">{headerRight}</span>
+          )}
+        </div>
+      )}
+      <div className={hasHeader || hasFooter ? 'p-6' : ''}>
+        {children}
+      </div>
+      {hasFooter && (
+        <div className={footerTinted ? 'card-footer-tinted' : 'border-t-4 border-foreground px-6 py-4'}>
+          {footerContent}
+        </div>
+      )}
     </div>
   )
 }

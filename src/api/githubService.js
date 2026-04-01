@@ -26,3 +26,11 @@ export async function fetchTrendingRepos() {
   })
   return data.items
 }
+export function fetchUserEvents(username) {
+  return axiosClient
+    .get(`/users/${username}/events/public`, {
+      params: { per_page: 10 }
+    })
+    .then(res => res.data)
+}
+

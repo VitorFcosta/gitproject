@@ -17,6 +17,7 @@ const buttonVariants = cva(
       variant: {
         primary: 'bg-primary text-on-primary hover:brightness-95',
         secondary: 'bg-secondary text-on-primary hover:brightness-95',
+        accent: 'bg-accent text-foreground hover:brightness-95',
         ghost: 'bg-white text-foreground hover:bg-gray-100',
       },
       size: {
@@ -25,7 +26,6 @@ const buttonVariants = cva(
         lg: 'text-xl px-8 py-4',
       },
     },
-    // ↓ Valores padrão (se ninguém passar a prop)
     defaultVariants: {
       variant: 'primary',
       size: 'md',

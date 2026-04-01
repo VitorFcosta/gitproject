@@ -1,13 +1,12 @@
 import { cn } from '../../lib/utils'
 
-export default function Skeleton({ className, ...props }) {
+export default function Skeleton({ className }) {
   return (
     <div
       className={cn(
-        'bg-gray-200 animate-pulse border-4 border-foreground',
+        'bg-white border-4 border-foreground animate-pulse',
         className
       )}
-      {...props}
     />
   )
 }
