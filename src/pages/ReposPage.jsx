@@ -1,14 +1,24 @@
 import { useParams } from 'react-router-dom'
-import { useRepos } from '../hooks/userepos'
+import { useInfiniteRepos } from '../hooks/useInfiniteRepos'
+import { Loader2 } from 'lucide-react'
 import RepoCard from '../components/ui/RepoCard'
 import TabNav from '../components/shared/TabNav'
 import BrutalCard from '../components/ui/BrutalCard'
+import BrutalButton from '../components/ui/BrutalButton'
 import Skeleton from '../components/ui/Skeleton'
 import CodeLabel from '../components/ui/CodeLabel'
 
 export default function ReposPage() {
   const { username } = useParams()
-  const { data: repos, isLoading, isError, error } = useRepos(username)
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteRepos(username)
 
   if (isLoading) {
     return (
@@ -39,6 +49,10 @@ export default function ReposPage() {
     )
   }
 
+  // Flatten all pages into a single array of repos
+  const allRepos = data?.pages.flatMap((page) => page.repos) ?? []
+  const totalLoaded = allRepos.length
+
   return (
     <div className="min-h-screen bg-secondary p-8">
       <div className="max-w-6xl mx-auto">
@@ -56,24 +70,52 @@ export default function ReposPage() {
             </h1>
           </div>
           <BrutalCard padding="sm" className="flex items-center gap-2">
-            <CodeLabel variant="accent">{repos.length}</CodeLabel>
-            <span className="font-mono text-xs uppercase">Repositórios_Públicos</span>
+            <CodeLabel variant="accent">{totalLoaded}</CodeLabel>
+            <span className="font-mono text-xs uppercase">Carregados</span>
           </BrutalCard>
         </div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {repos.map((repo, i) => (
+          {allRepos.map((repo, i) => (
             <div key={repo.id} className={`animate-in stagger-${Math.min(i + 3, 6)}`}>
               <RepoCard repo={repo} />
             </div>
           ))}
         </div>
 
-        {repos.length === 0 && (
+        {allRepos.length === 0 && (
           <BrutalCard className="text-center mt-8">
             <p className="font-mono text-lg">Nenhum repositório público encontrado.</p>
           </BrutalCard>
+        )}
+
+        {/* Load More */}
+        {hasNextPage && (
+          <div className="flex justify-center mt-10 animate-in stagger-3">
+            <BrutalButton
+              variant="accent"
+              size="lg"
+              onClick={() => fetchNextPage()}
+              disabled={isFetchingNextPage}
+            >
+              {isFetchingNextPage ? (
+                <span className="flex items-center gap-2">
+                  <Loader2 size={20} className="animate-spin" />
+                  LOADING_MODULES...
+                </span>
+              ) : (
+                'LOAD_MORE_REPOS >>'
+              )}
+            </BrutalButton>
+          </div>
+        )}
+
+        {/* End of list */}
+        {!hasNextPage && allRepos.length > 0 && (
+          <div className="mt-10 text-center">
+            <CodeLabel variant="accent">END_OF_INDEX :: ALL {totalLoaded} MODULES LOADED</CodeLabel>
+          </div>
         )}
       </div>
     </div>

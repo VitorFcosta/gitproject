@@ -16,16 +16,23 @@ export async function fetchRepos(username) {
   return data
 }
 
-export async function fetchTrendingRepos() {
-  const { data } = await axiosClient.get('/search/repositories', {
+export async function fetchAllRepos(username, page = 1) {
+  const { data, headers } = await axiosClient.get(`/users/${username}/repos`, {
     params: {
-      q: 'stars:>10000',
-      sort: 'stars',
-      per_page: 3,
+      sort: 'updated',
+      direction: 'desc',
+      per_page: 12,
+      page,
     },
   })
-  return data.items
+
+  // Parse 'Link' header to detect if there's a next page
+  const linkHeader = headers?.link || ''
+  const hasNextPage = linkHeader.includes('rel="next"')
+
+  return { repos: data, nextPage: hasNextPage ? page + 1 : undefined }
 }
+
 export function fetchUserEvents(username) {
   return axiosClient
     .get(`/users/${username}/events/public`, {
