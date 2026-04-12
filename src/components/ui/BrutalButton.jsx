@@ -44,6 +44,3 @@ export default function BrutalButton({ children, variant, size, className, ...pr
   )
 }
 
-
-// eslint-disable-next-line react-refresh/only-export-components
-export { buttonVariants }

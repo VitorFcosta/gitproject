@@ -7,7 +7,7 @@ export default function RepoCard({ repo }) {
   return (
     <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
       <BrutalCard hover className="h-full flex flex-col">
-        {/* Header: nome + link */}
+        {/* Header nome + link */}
         <div className="flex items-start justify-between mb-3">
           <h3 className="font-heading text-lg font-bold truncate flex-1 uppercase">
             {repo.name}

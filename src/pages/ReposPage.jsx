@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useInfiniteRepos } from '../hooks/useInfiniteRepos'
 import { Loader2 } from 'lucide-react'
+import { Helmet } from 'react-helmet-async'
 import RepoCard from '../components/ui/RepoCard'
 import TabNav from '../components/shared/TabNav'
 import BrutalCard from '../components/ui/BrutalCard'
@@ -23,6 +24,9 @@ export default function ReposPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-secondary p-8">
+        <Helmet>
+          <title>Carregando Repos | GitProject</title>
+        </Helmet>
         <Skeleton className="h-10 w-full mb-8" />
         <Skeleton className="h-12 w-72 mb-8" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -55,6 +59,10 @@ export default function ReposPage() {
 
   return (
     <div className="min-h-screen bg-secondary p-8">
+      <Helmet>
+        <title>Repositórios de {username} | GitProject</title>
+        <meta name="description" content={`Lista completa de repositórios do usuário ${username}`} />
+      </Helmet>
       <div className="max-w-6xl mx-auto">
         {/* Tab Navigation */}
         <div className="animate-in stagger-1 mb-8">

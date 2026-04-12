@@ -75,7 +75,7 @@ export default function ContributionHeatmap({ events }) {
         </div>
       </div>
 
-      {/* Legend */}
+      {/* Legenda */}
       <div className="flex items-center justify-between mt-4">
         <span className="font-mono text-xs text-gray-500">
           CONTRIB_TOTAL: {totalContributions} EVENTS CAPTURED IN LAST_SESSION

@@ -74,5 +74,3 @@ export default function BrutalCard({
   )
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
-export { cardVariants }

@@ -6,11 +6,12 @@ import { useRepos } from '../hooks/useRepos'
 import BrutalCard from '../components/ui/BrutalCard'
 import BrutalButton from '../components/ui/BrutalButton'
 import StatCard from '../components/ui/StatCard'
-import BreadcrumbBar from '../components/shared/BreadcrumbBar'
 import TabNav from '../components/shared/TabNav'
 import Skeleton from '../components/ui/Skeleton'
 import CodeLabel from '../components/ui/CodeLabel'
 import ContributionHeatmap from '../components/ui/ContributionHeatmap'
+import { Helmet } from 'react-helmet-async'
+import NotFoundPage from './NotFoundPage'
 
 const TAG_COLORS = {
   JAVASCRIPT: 'tag-javascript',
@@ -53,6 +54,9 @@ export default function ProfilePage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-secondary p-8">
+        <Helmet>
+          <title>Carregando | GitProject</title>
+        </Helmet>
         <Skeleton className="h-10 w-32 mb-4" />
         <Skeleton className="h-8 w-full mb-4" />
         <div className="flex flex-col md:flex-row gap-8">
@@ -68,27 +72,17 @@ export default function ProfilePage() {
   }
 
   if (isError) {
-    return (
-      <div className="min-h-screen bg-secondary p-8 flex items-center justify-center">
-        <BrutalCard variant="primary" className="max-w-md text-center">
-          <h2 className="text-3xl mb-4">Oops!</h2>
-          <p className="font-mono mb-4">
-            {error?.response?.status === 404
-              ? `Usuário "${username}" não encontrado.`
-              : 'Erro ao buscar dados. Tente novamente.'}
-          </p>
-          <Link to="/">
-            <BrutalButton variant="ghost" size="sm">VOLTAR</BrutalButton>
-          </Link>
-        </BrutalCard>
-      </div>
-    )
+    return <NotFoundPage errorStatus={error?.response?.status} />
   }
 
   const topLanguages = getTopLanguages(repos)
 
   return (
     <div className="min-h-screen bg-secondary p-8">
+      <Helmet>
+        <title>{user.name ? `${user.name} | GitProject` : `${user.login} | GitProject`}</title>
+        <meta name="description" content={`Veja o perfil GitHub e repositórios de ${user.login}`} />
+      </Helmet>
       <div className="max-w-4xl mx-auto">
         {/* Tab Navigation */}
         <div className="animate-in stagger-1 mb-8">

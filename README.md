@@ -52,6 +52,24 @@ O sistema busca dados reais da [API do GitHub](https://docs.github.com/en/rest) 
 | **Repositórios** | `/dev/:username/repos` | Grid com os **top 6 repositórios** por estrelas |
 | **404** | `*` | Tela de erro com ASCII art e mensagem "DEV NÃO ENCONTRADO" |
 
+
+### 📸 Galeria
+
+**Página Inicial (Busca)**
+![HomePage](Prints/HomePage.png)
+
+**Visão Geral do Perfil**
+![PerfilPage](Prints/PerfilPage.png)
+
+**Detalhes e Contribuições**
+![PerfilPage2](Prints/PerfilPage2.png)
+
+**Explorador de Repositórios**
+![RepoPage](Prints/RepoPage.png)
+
+**Tratamento de Erros de API (404 / 403)**
+![Error404](Prints/Error404.png)
+
 ### Fluxo Principal
 ```
 Home → Digita username → Perfil do Dev → Ver Repositórios → Grid de cards

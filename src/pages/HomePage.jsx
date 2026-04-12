@@ -1,5 +1,6 @@
 import { Code2, Database, Zap, Star, Activity } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import SearchBar from '../components/shared/SearchBar.jsx'
 import BrutalCard from '../components/ui/BrutalCard'
 import CodeLabel from '../components/ui/CodeLabel'
@@ -7,6 +8,10 @@ import CodeLabel from '../components/ui/CodeLabel'
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>GitProject | Home</title>
+        <meta name="description" content="Explore perfis do GitHub no modo Neobrutalista" />
+      </Helmet>
       {/* Hero */}
       <main className="flex-1 p-8 md:p-16">
         <div className="max-w-6xl mx-auto">
@@ -31,10 +36,6 @@ export default function HomePage() {
                 <br />
                 <span className="text-primary">TUDO.</span>
               </h1>
-
-              <p className="font-mono text-sm md:text-base mb-8 animate-in stagger-3">
-                [ INDEXANDO 4.209.112 REPOSITÓRIOS GLOBALMENTE ]
-              </p>
 
               {/* Search */}
               <div className="max-w-xl mb-6 animate-in stagger-4">

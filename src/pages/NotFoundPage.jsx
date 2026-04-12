@@ -1,11 +1,17 @@
 import { RotateCcw } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import BrutalButton from '../components/ui/BrutalButton'
 import CodeLabel from '../components/ui/CodeLabel'
 
-export default function NotFoundPage() {
+export default function NotFoundPage({ errorStatus }) {
+  const isRateLimit = errorStatus === 403;
+
   return (
     <div className="min-h-screen bg-secondary flex items-center justify-center p-8 relative overflow-hidden">
+      <Helmet>
+        <title>{isRateLimit ? '403 - Rate Limit | GitProject' : '404 - Not Found | GitProject'}</title>
+      </Helmet>
       {/* Elementos geométricos decorativos */}
       <div className="absolute top-12 left-8 w-8 h-8 border-4 border-foreground rotate-12 animate-in stagger-1" />
       <div className="absolute top-20 right-16 w-16 h-16 bg-accent rotate-45 animate-in stagger-2" />
@@ -16,7 +22,9 @@ export default function NotFoundPage() {
       <div className="text-center max-w-lg relative z-10">
         {/* Status label */}
         <div className="flex justify-end mb-6 animate-in stagger-1">
-          <CodeLabel variant="ghost">STATUS: ERROR_404</CodeLabel>
+          <CodeLabel variant="ghost">
+            {isRateLimit ? 'STATUS: ERROR_403' : 'STATUS: ERROR_404'}
+          </CodeLabel>
         </div>
 
         {/* ASCII Art em card inclinado */}
@@ -34,16 +42,20 @@ export default function NotFoundPage() {
 
         {/* System failure label */}
         <div className="mb-4 animate-in stagger-3">
-          <CodeLabel variant="accent">{'>'}_ SYSTEM FAILURE: DEV_NOT_FOUND</CodeLabel>
+          <CodeLabel variant="accent">
+            {'>'}_ SYSTEM FAILURE: {isRateLimit ? 'API_RATE_LIMIT' : 'DEV_NOT_FOUND'}
+          </CodeLabel>
         </div>
 
         {/* Título com sobreposição */}
         <h1 className="text-5xl md:text-7xl mb-8 animate-in stagger-4">
-          404_DEV
+          {isRateLimit ? '403_API' : '404_DEV'}
           <br />
-          <span className="relative left-4 md:left-8 text-primary">NÃO</span>
+          <span className="relative left-4 md:left-8 text-primary">
+            {isRateLimit ? 'LIMITE' : 'NÃO'}
+          </span>
           <br />
-          ENCONTRADO
+          {isRateLimit ? 'ATINGIDO' : 'ENCONTRADO'}
         </h1>
 
         {/* Botão amarelo */}
