@@ -27,6 +27,7 @@ Transforme dados crus do GitHub em uma experiência visual de alto impacto — b
 [![TanStack Query](https://img.shields.io/badge/TanStack_Query-5-000000?style=flat-square&logo=reactquery&logoColor=FF90E8)](https://tanstack.com/query)
 
 </div>
+Aplicação Online: https://gitproject-cooo.vercel.app/
 
 ---
 
